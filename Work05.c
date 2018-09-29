@@ -1,6 +1,6 @@
 #include "Work05.h"
 
-int strlen(char *s){
+int my_strlen(char *s){
 	int len = 0;
 	while (*s){
 		len++;
@@ -8,42 +8,53 @@ int strlen(char *s){
 	}
 	return len;
 }
-char *strncpy(char *dest, char *source, int n){
+char *my_strncpy(char *dest, char *source, int n){
 	for (int i = 0; i < n; i++){
 		dest[i]=source[i];
 	}
-	// for (int i = n; i < strlen(dest); i++){
+	// for (int i = n; i < my_strlen(dest); i++){
 	// 	dest[i]='.';
 	// }
 	return dest;
 }
-char *strcat(char *dest, char *source){
-	int last = strlen(dest);
-	for (int i = 0; i < strlen(source); i++){
+char *my_strcat(char *dest, char *source){
+	int last = my_strlen(dest);
+	for (int i = 0; i < my_strlen(source); i++){
 		dest[last+i] = source[i];
 	}
 	return dest;
 }
-int min(char *s1, char *s2){
-	int len0 = strlen(s1);
-	int len1 = strlen(s2);
-	if (len1 > len0){
-		return len1;
+// int min(char *s1, char *s2){
+// 	int len0 = my_strlen(s1);
+// 	int len1 = my_strlen(s2);
+// 	if (len1 > len0){
+// 		return len1;
+// 	}
+// 	return len0;
+// }
+int my_strcmp(char *s1, char *s2){
+	int sum1 = 0, sum2 = 0;
+	for (int i = 0; i < my_strlen(s1); i++){
+		sum1 += (int)s1[i];
 	}
-	return len0;
-}
-int strcmp(char *s1, char *s2){
-	for (int i = 0; i < min(s1,s2); i++){
-		if (s1[i] != s2[i]){
-			if (s1[i] > s2[i]){
-				return s1[i] - s2[i];
-			}
-			return s2[i]-s1[i];
-		}
+	for (int j = 0; j < my_strlen(s2); j++){
+		sum2 += (int)s2[j];
 	}
-	return 0;
+	return sum1 - sum2;
+	// for (int i = 0; i < min(s1,s2); i++){
+	// 	if (s1[i] != s2[i]){
+	// 		if (s1[i] > s2[i]){
+	// 			return s1[i] - s2[i];
+	// 		}
+	// 		return s2[i]-s1[i];
+	// 	}
+	// }
+	// return 0;
 }
-char *strchr(char *s, char c){
+char *my_strchr(char *s, char c){
+	if (c == 0){
+		return s+my_strlen(s);
+	}
 	while (*s){
 		if (*s == c){
 			return s;
@@ -53,9 +64,9 @@ char *strchr(char *s, char c){
 	return NULL;
 }
 
-char *strstr(char *s1, char *s2){
-	int len = strlen(s2);
-	for (int i = 0; i <= strlen(s1)-len; i++){
+char *my_strstr(char *s1, char *s2){
+	int len = my_strlen(s2);
+	for (int i = 0; i <= my_strlen(s1)-len; i++){
 		int result = 1;
 		int marker = 0;
 		while(marker < len){
@@ -72,4 +83,24 @@ char *strstr(char *s1, char *s2){
 	}
 	return NULL;
 }
+char *my_strncat(char *dest, char *source, int n){
+	int last = my_strlen(dest);
+	for (int i = 0; i < n; i++){
+		dest[last+i] = source[i];
+	}
+	dest[last+n]=0;
+	return dest;
+}
+char *my_strcpy(char *dest, char *source){
+	for (int i = 0; i < my_strlen(source); i++){
+		dest[i]=source[i];
+	}
+	return dest;
+}
+
+
+
+
+
+
 
